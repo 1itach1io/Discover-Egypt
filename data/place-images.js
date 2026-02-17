@@ -75,7 +75,7 @@ const placeImages = {
     "p008": "https://arabic.news.cn/arabic/2017-10/01/136652209_15068217574991n.jpg",
     
     // p033 - Giftun Islands (جزر الجفتون)
-    "p033": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Egypt-Hurghada-from-plane01.jpg/250px-Egypt-Hurghada-from-plane01.jpg",
+    "p033": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1170&auto=format&fit=crop",
     
     // p036 - Dahab Blue Hole (الحفرة الزرقاء - دهب)
     "p036": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNVb5g2gHS2Ys0aIwhdLpMBUenDKLOsuBv5w&s",
@@ -84,7 +84,7 @@ const placeImages = {
     "p037": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM7OWVVOD5zYrndP5HN5tYM_bwp9FDHGnUXA&s",
     
     // p041 - Lake Qarun (بحيرة قارون)
-    "p041": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/QarunLake.jpg/330px-QarunLake.jpg",
+    "p041": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1170&auto=format&fit=crop",
     
     // p042 - Wadi El-Rayan Waterfalls (شلالات وادي الريان)
     "p042": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7H6Wuj6aMQmPjdoM1jWUKWmr8uFHGaLW36w&s",
@@ -93,10 +93,10 @@ const placeImages = {
     "p043": "https://books.openedition.org/cedej/file/5380/tei/img-2.jpg/download",
     
     // p044 - Farafra Oasis (واحة الفرافرة)
-    "p044": "https://upload.wikimedia.org/wikipedia/commons/f/fb/FarafraAinBilad.jpg",
+    "p044": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1176&auto=format&fit=crop",
     
     // p045 - Bahariya Oasis (واحة البحرية)
-    "p045": "https://upload.wikimedia.org/wikipedia/commons/a/a9/BahriyaSaltLake.jpg",
+    "p045": "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1176&auto=format&fit=crop",
     
     // ===== الشواطئ (Beaches) =====
     
@@ -104,7 +104,7 @@ const placeImages = {
     "p032": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/519401702.jpg?k=5528be1dfac3faf74346394e2378ce16b4e46b0f95cb98f42f62b6a090c94041&o=",
     
     // p035 - Naama Bay (خليج نعمة)
-    "p035": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Naama_Bay_R01.jpg/1280px-Naama_Bay_R01.jpg",
+    "p035": "https://images.unsplash.com/photo-1539768942893-daf53e448371?q=80&w=1171&auto=format&fit=crop",
     
     // p038 - Taba Border Crossing (طابا)
     "p038": "https://static.hiamag.com/inline-images/%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%AD%D8%A9%20%D9%81%D9%8A%20%D8%B7%D8%A7%D8%A8%D8%A7.jpg",
@@ -118,13 +118,13 @@ const placeImages = {
     // ===== المتاحف (Museums) =====
     
     // p021 - Egyptian Museum Tahrir (المتحف المصري بالتحرير)
-    "p021": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/The_Egyptian_Museum.jpg/330px-The_Egyptian_Museum.jpg",
+    "p021": "https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=1169&auto=format&fit=crop",
     
     // p022 - Grand Egyptian Museum GEM (المتحف المصري الكبير)
     "p022": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSifHvj_JcZNSlcNlCEnruYDjVriiNZqg4zw&s",
     
     // p055 - Coptic Museum (المتحف القبطي)
-    "p055": "https://upload.wikimedia.org/wikipedia/commons/1/19/Le_Mus%C3%A9e_Copte_du_Caire.JPG",
+    "p055": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1d8xPm7HQ65FWNioZf-FbVIlZHE3GG-Tq4A&s",
     
     // ===== المواقع الدينية (Religious) =====
     
@@ -132,7 +132,7 @@ const placeImages = {
     "p011": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQK3SsV1PXRlEXj1yDCSbNyjyMh6_hsGLH4w&s",
     
     // p025 - Al-Azhar Mosque (مسجد الأزهر)
-    "p025": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Al-Azhar_Mosque.jpg/640px-Al-Azhar_Mosque.jpg",
+    "p025": "https://egymonuments.gov.eg/media/1052/al-azhar-mosque.jpg",
     
     // p026 - Sultan Hassan Mosque (مسجد السلطان حسن)
     "p026": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKQmk016d3-mJT0Ub1NYWrCNR9Z71CIvAWfg&s",
@@ -152,7 +152,7 @@ const placeImages = {
     "p023": "https://egymonuments.gov.eg/media/2332/27.jpg",
     
     // p029 - Qaitbay Citadel (قلعة قايتباي)
-    "p029": "https://www.maspero.eg/image/750/450/2025/09/17590750830.jpg",
+    "p029": "https://egymonuments.gov.eg/media/1348/qaitbay.jpg",
     
     // p030 - Catacombs of Kom el Shoqafa (سراديب الموتى)
     "p030": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNMciEHF3Y0bnqyw0eWpb5jk3XAwgITvdfVw&s",

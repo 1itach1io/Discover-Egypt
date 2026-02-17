@@ -298,6 +298,25 @@ function closeUserDropdown() {
     }
 }
 
+// ========== Toggle Mobile User Menu (Collapse/Expand) ==========
+function toggleMobileUserMenu() {
+    const menuItems = document.getElementById('mobile-user-menu-items');
+    const chevron = document.getElementById('mobile-user-chevron');
+    if (!menuItems) return;
+
+    const isOpen = menuItems.classList.contains('open');
+
+    if (isOpen) {
+        menuItems.classList.remove('open');
+        menuItems.style.display = '';
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+    } else {
+        menuItems.classList.add('open');
+        menuItems.style.display = '';
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+    }
+}
+
 // ========== Open Saved Plans from Dropdown ==========
 function openSavedPlansFromDropdown() {
     closeUserDropdown();
@@ -424,5 +443,6 @@ window.closeUserDropdown = closeUserDropdown;
 window.handleLogout = handleLogout;
 window.openSavedPlansFromDropdown = openSavedPlansFromDropdown;
 window.loadUserPlansCount = loadUserPlansCount;
+window.toggleMobileUserMenu = toggleMobileUserMenu;
 
 console.log('✅ User Menu System loaded');

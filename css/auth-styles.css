@@ -757,9 +757,13 @@
 }
 
 .mobile-user-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     padding: 0.5rem 0;
+}
+
+.mobile-user-menu.open {
+    display: flex;
 }
 
 .mobile-menu-item {
@@ -1037,3 +1041,25 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+
+/* ========== MOBILE USER MENU TOGGLE FIX ========== */
+/* Make header look clickable */
+#mobile-user-header-toggle {
+    position: relative;
+    transition: background 0.2s ease;
+}
+
+#mobile-user-header-toggle:active {
+    opacity: 0.85;
+}
+
+#mobile-user-chevron {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* Animate menu open */
+#mobile-user-menu-items {
+    animation: none;
+}
