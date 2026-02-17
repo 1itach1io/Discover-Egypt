@@ -1,0 +1,31 @@
+/* ==========================================
+   DISCOVER EGYPT - BASE CSS
+   Import Design System + Legacy Compatibility
+   ========================================== */
+
+/* Import Design System */
+@import url('design-system.css');
+
+/* ========== LEGACY VARIABLE COMPATIBILITY ========== */
+/* Map old variable names to new design system */
+
+:root {
+    /* Legacy spacing - mapped to new system */
+    --spacing-xs: var(--space-2);
+    --spacing-sm: var(--space-4);
+    --spacing-md: var(--space-6);
+    --spacing-lg: var(--space-8);
+    --spacing-xl: var(--space-12);
+    
+    /* Legacy colors - use design system colors */
+    --text-light: var(--text-on-dark);
+    --border-color: var(--border-primary);
+    --shadow-light: var(--shadow-sm);
+    --shadow-medium: var(--shadow-md);
+    --shadow-heavy: var(--shadow-lg);
+    
+    /* Legacy transitions - use design system */
+    --transition-fast: var(--transition-fast);
+    --transition-medium: var(--transition-base);
+    --transition-slow: var(--transition-slow);
+}

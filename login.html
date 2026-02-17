@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Discover Egypt</title>
+    
+    <link rel="icon" type="image/webp" href="images/giza-pyramids-frygia9m5ggjhaz1.webp"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #D4AF37 0%, #8B7355 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #D4AF37;
+            font-size: 32px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .logo p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 5px;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .auth-tab.active {
+            background: white;
+            color: #D4AF37;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: white;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin: -10px 0 20px;
+        }
+        
+        .forgot-password a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #999;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .google-btn {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .google-btn:hover {
+            border-color: #D4AF37;
+            background: #fafafa;
+        }
+        
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-home a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-home a:hover {
+            color: #D4AF37;
+        }
+        
+        /* Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        .lang-btn {
+            background: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .lang-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 40px 30px;
+            }
+            
+            .logo h1 {
+                font-size: 28px;
+            }
+            
+            .auth-tab {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <select class="lang-btn" id="language-select">
+            <option value="en">🇬🇧 English</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="fr">🇫🇷 Français</option>
+        </select>
+    </div>
+    
+    <div class="auth-container">
+        <!-- Logo -->
+        <div class="logo">
+            <h1>🏛️ Discover Egypt</h1>
+            <p id="welcome-text">Welcome back!</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login" id="login-tab">Login</button>
+            <button class="auth-tab" data-tab="signup" id="signup-tab">Sign Up</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form class="auth-form active" id="login-form">
+            <div class="form-group">
+                <label for="login-email" id="login-email-label">Email</label>
+                <input type="email" id="login-email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password" id="login-password-label">Password</label>
+                <input type="password" id="login-password" required>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#" id="forgot-link">Forgot Password?</a>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="login-submit">Login</button>
+            
+            <div class="divider">
+                <span id="or-text">OR</span>
+            </div>
+            
+            <button type="button" class="google-btn" id="google-login-btn">
+                <svg class="google-icon" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                <span id="google-login-text">Continue with Google</span>
+            </button>
+        </form>
+        
+        <!-- Signup Form -->
+        <form class="auth-form" id="signup-form">
+            <div class="form-group">
+                <label for="signup-name" id="signup-name-label">Full Name</label>
+                <input type="text" id="signup-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="signup-email" id="signup-email-label">Email</label>
+                <input type="email" id="signup-email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="signup-password" id="signup-password-label">Password</label>
+                <input type="password" id="signup-password" required minlength="6">
+            </div>
+            
+            <button type="submit" class="submit-btn" id="signup-submit">Sign Up</button>
+            
+            <div class="divider">
+                <span id="or-text-2">OR</span>
+            </div>
+            
+            <button type="button" class="google-btn" id="google-signup-btn">
+                <svg class="google-icon" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                <span id="google-signup-text">Continue with Google</span>
+            </button>
+        </form>
+        
+        <!-- Back to Home -->
+        <div class="back-home">
+            <a href="index.html" id="back-link">← Back to Home</a>
+        </div>
+    </div>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Auth System -->
+    <script src="js/auth/auth-system.js"></script>
+    
+    <script>
+        // Get current language
+        let currentLang = localStorage.getItem('language') || 'en';
+        document.getElementById('language-select').value = currentLang;
+        
+        // Update UI text based on language
+        function updateUIText() {
+            const t = authTranslations[currentLang];
+            
+            // Tabs
+            document.getElementById('login-tab').textContent = t.login;
+            document.getElementById('signup-tab').textContent = t.signup;
+            
+            // Login form
+            document.getElementById('login-email-label').textContent = t.email;
+            document.getElementById('login-password-label').textContent = t.password;
+            document.getElementById('forgot-link').textContent = t.forgotPassword;
+            document.getElementById('login-submit').textContent = t.loginButton;
+            document.getElementById('google-login-text').textContent = t.loginWithGoogle;
+            
+            // Signup form
+            document.getElementById('signup-name-label').textContent = t.name;
+            document.getElementById('signup-email-label').textContent = t.email;
+            document.getElementById('signup-password-label').textContent = t.password;
+            document.getElementById('signup-submit').textContent = t.signupButton;
+            document.getElementById('google-signup-text').textContent = t.loginWithGoogle;
+            
+            // Other
+            document.getElementById('or-text').textContent = t.or;
+            document.getElementById('or-text-2').textContent = t.or;
+            document.getElementById('welcome-text').textContent = 
+                document.querySelector('.auth-form.active').id === 'login-form' ? t.welcome : t.createAccount;
+            
+            // RTL for Arabic
+            if (currentLang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', currentLang);
+            }
+        }
+        
+        // Language change
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('language', currentLang);
+            updateUIText();
+        });
+        
+        // Tab switching
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // Update tabs
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update forms
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                document.getElementById(`${tabName}-form`).classList.add('active');
+                
+                // Update welcome text
+                updateUIText();
+            });
+        });
+        
+        // Login form submit
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                await window.authSystem.loginWithEmail(email, password);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Login failed:', error);
+            }
+        });
+        
+        // Signup form submit
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            try {
+                await window.authSystem.signUpWithEmail(email, password, name);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Signup failed:', error);
+            }
+        });
+        
+        // Google login buttons
+        document.getElementById('google-login-btn').addEventListener('click', async () => {
+            try {
+                await window.authSystem.loginWithGoogle();
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Google login failed:', error);
+            }
+        });
+        
+        document.getElementById('google-signup-btn').addEventListener('click', async () => {
+            try {
+                await window.authSystem.loginWithGoogle();
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Google signup failed:', error);
+            }
+        });
+        
+        // Initialize UI
+        updateUIText();
+    </script>
+</body>
+</html>
