@@ -600,11 +600,26 @@
     .mobile-only-item {
         display: list-item !important;
     }
+    
+    /* استثناء: البروفايل لا يظهر إلا مع class show */
+    .mobile-only-item.mobile-user-profile {
+        display: none !important;
+    }
+    
+    .mobile-only-item.mobile-user-profile.show {
+        display: list-item !important;
+    }
 }
 
 @media (min-width: 769px) {
     .mobile-only,
     .mobile-only-item {
+        display: none !important;
+    }
+    
+    /* التأكد من إخفاء البروفايل على الكمبيوتر */
+    .mobile-user-profile,
+    .mobile-user-profile.show {
         display: none !important;
     }
 }

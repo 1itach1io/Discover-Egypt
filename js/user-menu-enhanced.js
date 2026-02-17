@@ -61,34 +61,41 @@ function updateAuthUI(user) {
     const authButtons = document.getElementById('auth-buttons');
     const userMenuContainer = document.getElementById('user-menu-container');
     const authMobileItem = document.getElementById('auth-mobile-item');
+    const mobileUserProfile = document.getElementById('mobile-user-profile');
     
     console.log('🔄 Updating Auth UI...', {
         user: user ? user.email : 'Not logged in',
         authButtons: !!authButtons,
         userMenuContainer: !!userMenuContainer,
-        authMobileItem: !!authMobileItem
+        authMobileItem: !!authMobileItem,
+        mobileUserProfile: !!mobileUserProfile
     });
     
     if (user) {
         // User is logged in
         console.log('✅ User logged in:', user.email);
         
-        // Hide auth buttons (desktop)
+        // Hide auth buttons
         if (authButtons) {
             authButtons.style.display = 'none';
             authButtons.classList.remove('show');
         }
         
-        // Hide auth mobile item (important!)
+        // Hide mobile auth button
         if (authMobileItem) {
             authMobileItem.style.display = 'none';
-            authMobileItem.classList.add('hidden');
         }
         
         // Show user menu
         if (userMenuContainer) {
             userMenuContainer.style.display = 'flex';
             userMenuContainer.classList.add('show');
+        }
+        
+        // Show mobile user profile
+        if (mobileUserProfile) {
+            mobileUserProfile.classList.add('show');
+            updateMobileUserProfile(user);
         }
         
         // Update user info
@@ -101,22 +108,26 @@ function updateAuthUI(user) {
         // User is not logged in
         console.log('ℹ️ User not logged in');
         
-        // Show auth buttons (desktop only)
+        // Show auth buttons
         if (authButtons) {
             authButtons.style.display = 'flex';
             authButtons.classList.add('show');
         }
         
-        // Show auth mobile item (mobile only)
+        // Show mobile auth button
         if (authMobileItem) {
-            authMobileItem.style.display = 'block';
-            authMobileItem.classList.remove('hidden');
+            authMobileItem.style.display = 'list-item';
         }
         
         // Hide user menu
         if (userMenuContainer) {
             userMenuContainer.style.display = 'none';
             userMenuContainer.classList.remove('show');
+        }
+        
+        // Hide mobile user profile
+        if (mobileUserProfile) {
+            mobileUserProfile.classList.remove('show');
         }
     }
     
@@ -366,6 +377,31 @@ async function handleLogout() {
             fr: 'Erreur de déconnexion'
         }));
     }
+}
+
+// ========== Update Mobile User Profile ==========
+function updateMobileUserProfile(user) {
+    if (!user) return;
+    
+    const displayName = user.displayName || user.email.split('@')[0];
+    const email = user.email;
+    const photoURL = user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayName) + '&background=d4af37&color=fff&size=128';
+    
+    const mobileUserPhoto = document.getElementById('mobile-user-photo');
+    const mobileUserName = document.getElementById('mobile-user-name');
+    const mobileUserEmail = document.getElementById('mobile-user-email');
+    const mobilePlansCount = document.getElementById('mobile-plans-count');
+    
+    if (mobileUserPhoto) mobileUserPhoto.src = photoURL;
+    if (mobileUserName) mobileUserName.textContent = displayName;
+    if (mobileUserEmail) mobileUserEmail.textContent = email;
+    
+    // Update plans count if available
+    if (mobilePlansCount && window.userPlansCount !== undefined) {
+        mobilePlansCount.textContent = window.userPlansCount || '0';
+    }
+    
+    console.log('✅ Mobile user profile updated');
 }
 
 // ========== Helper Functions ==========

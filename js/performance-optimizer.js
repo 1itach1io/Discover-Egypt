@@ -168,10 +168,24 @@
         },
         
         checkResourcePerformance: function(entry) {
+            // تجاهل طلبات Firestore الداخلية (WebSocket / Long-Polling)
+            // هذه اتصالات دائمة مصمَّمة للبقاء مفتوحة، ولا يجب قياسها كـ "بطيئة"
+            const isFirebaseInternal = entry.name.includes('firestore.googleapis.com') ||
+                                       entry.name.includes('channel?gsessionid') ||
+                                       entry.name.includes('google.firestore');
+            if (isFirebaseInternal) return;
+
             const loadTime = entry.responseEnd - entry.startTime;
-            const threshold = entry.initiatorType === 'css' ? 
-                CONFIG.performanceThresholds.cssLoad : 
-                CONFIG.performanceThresholds.jsLoad;
+            
+            // حدود مختلفة حسب نوع الملف
+            let threshold;
+            if (entry.initiatorType === 'css') {
+                threshold = CONFIG.performanceThresholds.cssLoad;
+            } else if (entry.initiatorType === 'img') {
+                threshold = 5000;  // الصور لها هامش أكبر
+            } else {
+                threshold = CONFIG.performanceThresholds.jsLoad;
+            }
             
             if (loadTime > threshold) {
                 Logger.warn(

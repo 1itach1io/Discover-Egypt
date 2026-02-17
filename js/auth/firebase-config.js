@@ -66,8 +66,16 @@ try {
     });
   
   // Configure Firestore settings
+  // experimentalAutoDetectLongPolling: true → يختار تلقائياً WebSocket بدلاً من Long Polling
+  // هذا يحل مشكلتين دفعة واحدة:
+  //   1. تحذيرات Cookie "SameSite=Lax/Strict" في cross-site context
+  //      (Long Polling يضع cookies في iframe خارجي → يُرفض من المتصفح)
+  //   2. تأخر الـ fetch الطويل: channel?gsessionid=... بـ 60,000ms
+  //      (WebSocket أسرع بكثير ولا يستخدم cookies)
   db.settings({
-    cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
+    cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+    experimentalAutoDetectLongPolling: true,
+    merge: true
   });
   
   // Enable offline persistence

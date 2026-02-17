@@ -132,7 +132,7 @@ const placeImages = {
     "p011": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQK3SsV1PXRlEXj1yDCSbNyjyMh6_hsGLH4w&s",
     
     // p025 - Al-Azhar Mosque (مسجد الأزهر)
-    "p025": "https://awkafonline.gov.eg/web/image/blog.post/3124/image_content_thumbnail",
+    "p025": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Al-Azhar_Mosque.jpg/640px-Al-Azhar_Mosque.jpg",
     
     // p026 - Sultan Hassan Mosque (مسجد السلطان حسن)
     "p026": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKQmk016d3-mJT0Ub1NYWrCNR9Z71CIvAWfg&s",

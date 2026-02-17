@@ -99,7 +99,7 @@ function initializeExploreCards() {
     
     const cardsContainer = document.getElementById('explore-cards-container');
     if (!cardsContainer) {
-        console.error('Cards container not found');
+        console.error('Cards container not found: missing <div id="explore-cards-container"> in HTML. Make sure the explore section exists in index.html.');
         return;
     }
     

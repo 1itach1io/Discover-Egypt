@@ -154,6 +154,7 @@ function updateAuthUI(user) {
     const authButtons = document.getElementById('auth-buttons');
     const userMenu = document.getElementById('user-menu');
     const authMobileItem = document.getElementById('auth-mobile-item');
+    const mobileUserProfile = document.getElementById('mobile-user-profile');
     
     if (user) {
         // User is logged in
@@ -166,12 +167,34 @@ function updateAuthUI(user) {
             }
         }
         if (authMobileItem) authMobileItem.style.display = 'none';
+        
+        // Show mobile user profile
+        if (mobileUserProfile) {
+            mobileUserProfile.classList.add('show');
+            updateMobileUserProfile(user);
+        }
     } else {
         // User is logged out
         if (authButtons) authButtons.style.display = 'flex';
         if (userMenu) userMenu.style.display = 'none';
-        if (authMobileItem) authMobileItem.style.display = 'block';
+        if (authMobileItem) authMobileItem.style.display = 'list-item';
+        if (mobileUserProfile) mobileUserProfile.classList.remove('show');
     }
+}
+
+// ========== Update Mobile User Profile ==========
+function updateMobileUserProfile(user) {
+    const displayName = user.displayName || user.email.split('@')[0];
+    const email = user.email;
+    const photoURL = user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayName) + '&background=d4af37&color=fff&size=128';
+    
+    const mobileUserPhoto = document.getElementById('mobile-user-photo');
+    const mobileUserName = document.getElementById('mobile-user-name');
+    const mobileUserEmail = document.getElementById('mobile-user-email');
+    
+    if (mobileUserPhoto) mobileUserPhoto.src = photoURL;
+    if (mobileUserName) mobileUserName.textContent = displayName;
+    if (mobileUserEmail) mobileUserEmail.textContent = email;
 }
 
 // ========== Login with Email ==========

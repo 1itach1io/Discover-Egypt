@@ -41,7 +41,7 @@
     transform: translateY(0) scale(0.98);
 }
 
-/* ========== AUTH BUTTONS - DESKTOP ========== */
+/* ========== AUTH BUTTONS - RESPONSIVE ========== */
 .auth-buttons {
     display: none; /* Hidden by default, shown when user is not logged in */
     align-items: center;
@@ -86,14 +86,31 @@
     font-size: 16px;
 }
 
-/* Desktop Only Class */
-.desktop-only {
-    display: flex !important;
-}
-
+/* Mobile Responsive for Auth Button */
 @media (max-width: 768px) {
-    .desktop-only {
-        display: none !important;
+    /* Ensure auth-buttons container is visible on mobile */
+    .auth-buttons {
+        display: none; /* Still hidden by default, JavaScript will show it */
+    }
+    
+    .auth-buttons.show,
+    .auth-buttons[style*="display: flex"] {
+        display: flex !important;
+    }
+    
+    .auth-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        gap: 6px;
+    }
+    
+    .auth-btn.login-btn i {
+        font-size: 14px;
+    }
+    
+    /* Make sure nav-controls is visible */
+    .nav-controls {
+        display: flex !important;
     }
 }
 

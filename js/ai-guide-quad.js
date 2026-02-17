@@ -20,9 +20,9 @@
             nameAr: 'جيميني 2.5',
             emoji: '🔮',
             icon: '✨',
-            apiKey: window.API_KEYS?.gemini || 'DEMO_KEY',
+            apiKey: 'AIzaSyByWFwJs823lYn7HHJR8npuxdnwqZKlfWg',
             endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
-            color: '#4285f4',
+            color: '#c1a025',
             gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             strengths: ['الفهم العميق للسياق', 'السرعة الفائقة', 'دقة المعلومات'],
             weaknesses: ['قد يكون مختصراً أحياناً'],
@@ -35,14 +35,14 @@
             enabled: true,
             priority: 1
         },
-        
+
         GROQ: {
             id: 'groq',
             name: 'Groq Llama 3.3',
             nameAr: 'جروك لاما',
             emoji: '⚡',
             icon: '🚀',
-            apiKey: window.API_KEYS?.groq || 'DEMO_KEY',
+            apiKey: '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',
             endpoint: 'https://api.groq.com/openai/v1/chat/completions',
             model: 'llama-3.3-70b-versatile',
             color: '#f97316',
@@ -58,14 +58,14 @@
             enabled: true,
             priority: 2
         },
-        
+
         COHERE: {
             id: 'cohere',
             name: 'Cohere Command-A',
             nameAr: 'كوهير كوماند',
             emoji: '🎯',
             icon: '💎',
-            apiKey: window.API_KEYS?.cohere || 'DEMO_KEY',
+            apiKey: '6AHQVU015rkNgRnVUlJlrNZDv5lYHrCgaNxjM8Wb',
             endpoint: 'https://api.cohere.com/v2/chat',
             model: 'command-a-03-2025',
             color: '#d946ef',
@@ -81,14 +81,14 @@
             enabled: true,
             priority: 3
         },
-        
+
         MISTRAL: {
             id: 'mistral',
             name: 'Mistral Large 3',
             nameAr: 'ميسترال لارج',
             emoji: '🌟',
             icon: '⭐',
-            apiKey: window.API_KEYS?.mistral || 'DEMO_KEY',
+            apiKey: 'QBWNyeqnbL8TCcw2QSB9HN2rLGI6zUOW',
             endpoint: 'https://api.mistral.ai/v1/chat/completions',
             model: 'mistral-large-latest',
             color: '#8b5cf6',
@@ -105,7 +105,7 @@
             priority: 4
         }
     };
-    
+
     const CONFIG = {
         // نظام التبادل الذكي
         ROTATION: {

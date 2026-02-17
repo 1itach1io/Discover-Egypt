@@ -38,9 +38,9 @@
          CRITICAL: Prevent FOUC & Performance Optimization
          ============================================ -->
     <!-- Preload Critical CSS -->
-    <link rel="preload" href="css/base.css" as="style">
-    <link rel="preload" href="css/design-system.css" as="style">
+    <link rel="preload" href="css/merged-base.css" as="style">
     <link rel="preload" href="css/theme-enhanced.css" as="style">
+    <link rel="preload" href="css/main.css" as="style">
 
     <!-- Critical Inline CSS to Prevent FOUC -->
     <style>
@@ -64,7 +64,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c1a025 0%, #c1a025 100%);
             z-index: 999999;
             display: flex;
             align-items: center;
@@ -159,13 +159,10 @@
     <link rel="stylesheet" href="css/user-profile-enhanced.css">
     <!-- Enhanced Navbar Buttons CSS -->
     <link rel="stylesheet" href="css/navbar-buttons-enhanced.css">
-    <!-- Login Button Fix CSS -->
-    <link rel="stylesheet" href="css/login-button-fix.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-</head>
 </head>
 <body>
 
@@ -199,6 +196,37 @@
                     <span data-translate="auth.login">Login</span>
                 </a>
             </li>
+            
+            <!-- Mobile User Profile - للمستخدمين المسجلين -->
+            <li class="mobile-only-item mobile-user-profile" id="mobile-user-profile" style="display: none;">
+                <div class="mobile-user-header">
+                    <img class="mobile-user-photo" id="mobile-user-photo" alt="صورة المستخدم" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23d4af37'/%3E%3Ccircle cx='20' cy='16' r='7' fill='white'/%3E%3Cellipse cx='20' cy='34' rx='12' ry='8' fill='white'/%3E%3C/svg%3E">
+                    <div class="mobile-user-info">
+                        <h3 class="mobile-user-name" id="mobile-user-name"></h3>
+                        <p class="mobile-user-email" id="mobile-user-email"></p>
+                    </div>
+                </div>
+                <div class="mobile-user-menu">
+                    <a href="javascript:void(0)" class="mobile-menu-item" onclick="openSavedPlansFromDropdown()">
+                        <i class="fas fa-bookmark"></i>
+                        <span data-translate="plans.savedPlans">Saved Plans</span>
+                        <span class="plans-badge" id="mobile-plans-count">0</span>
+                    </a>
+                    <a href="javascript:void(0)" class="mobile-menu-item">
+                        <i class="fas fa-heart"></i>
+                        <span data-translate="auth.favorites">Favorites</span>
+                    </a>
+                    <a href="#settings" class="mobile-menu-item" onclick="document.getElementById('mobile-menu-toggle').click()">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="auth.settings">Settings</span>
+                    </a>
+                    <button class="mobile-menu-item logout-item" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="auth.logout">Logout</span>
+                    </button>
+                </div>
+            </li>
+            
             <li class="mobile-only-item">
                 <button class="mobile-search-btn" id="mobile-search-btn">
                     <i class="fas fa-search"></i>
@@ -217,24 +245,24 @@
             </select>
 
             <!-- Auth Buttons - للمستخدمين غير المسجلين -->
-            <div class="auth-buttons" id="auth-buttons">
+            <div class="auth-buttons" id="auth-buttons" style="display: none;">
                 <a href="login.html" class="auth-btn login-btn">
                     <i class="fas fa-sign-in-alt"></i>
-                    <span data-translate="auth.login">تسجيل الدخول</span>
+                    <span data-translate="auth.login">Login</span>
                 </a>
             </div>
 
             <!-- User Menu - للمستخدمين المسجلين -->
             <div class="user-menu-container" id="user-menu-container" style="display: none;">
                 <button class="user-menu-btn" id="user-menu-btn" aria-label="User menu">
-                    <img class="user-photo" id="user-photo" alt="صورة المستخدم" src="">
+                    <img class="user-photo" id="user-photo" alt="صورة المستخدم" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23d4af37'/%3E%3Ccircle cx='20' cy='16' r='7' fill='white'/%3E%3Cellipse cx='20' cy='34' rx='12' ry='8' fill='white'/%3E%3C/svg%3E">
                     <span class="user-display-name" id="user-display-name"></span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="user-dropdown" id="user-dropdown">
                     <!-- User Profile Header -->
                     <div class="user-profile-header">
-                        <img class="user-photo-large" id="user-photo-large" alt="صورة المستخدم" src="">
+                        <img class="user-photo-large" id="user-photo-large" alt="صورة المستخدم" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23d4af37'/%3E%3Ccircle cx='20' cy='16' r='7' fill='white'/%3E%3Cellipse cx='20' cy='34' rx='12' ry='8' fill='white'/%3E%3C/svg%3E">
                         <div class="user-profile-details">
                             <h3 class="user-profile-name" id="user-name-dropdown"></h3>
                             <p class="user-profile-email" id="user-email"></p>
@@ -249,12 +277,12 @@
                     
                     <!-- User Menu Items -->
                     <div class="dropdown-menu-items">
-                        <a href="#" class="dropdown-item" id="user-saved-plans" onclick="openSavedPlansFromDropdown()">
+                        <a href="javascript:void(0)" class="dropdown-item" id="user-saved-plans" onclick="openSavedPlansFromDropdown()">
                             <i class="fas fa-bookmark"></i>
                             <span data-translate="plans.savedPlans">Saved Plans</span>
                             <span class="plans-badge" id="dropdown-plans-count">0</span>
                         </a>
-                        <a href="#" class="dropdown-item" id="user-favorites">
+                        <a href="javascript:void(0)" class="dropdown-item" id="user-favorites">
                             <i class="fas fa-heart"></i>
                             <span data-translate="auth.favorites">Favorites</span>
                         </a>
@@ -280,7 +308,7 @@
             </button>
 
             <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
                 <span class="hamburger"></span>
             </button>
         </div>
@@ -344,87 +372,33 @@
                 <div class="tool-icon">🧮</div>
                 <h3><span data-translate="nav.calculator">Budget Calculator</span></h3>
             </a>
-            <a href="#current-weather-tool" class="nav-link tool-card" data-section="current-weather-tool">
-                <div class="tool-icon">🌡️</div>
-                <h3><span data-translate="tools.currentWeather">Current Weather</span></h3>
-            </a>
-            <a href="#weather-comparison-tool" class="nav-link tool-card" data-section="weather-comparison-tool">
-                <div class="tool-icon">📊</div>
-                <h3><span data-translate="tools.weatherComparison">Weather Comparison</span></h3>
-            </a>
-            <a href="#weather-map-tool" class="nav-link tool-card" data-section="weather-map-tool">
-                <div class="tool-icon">🗺️</div>
-                <h3><span data-translate="tools.weatherMap">Weather Map</span></h3>
-            </a>
+
         </div>
     </section>
 
-    <!-- ========== CURRENT WEATHER TOOL ========== -->
-    <section id="current-weather-tool" class="section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span data-translate="tools.currentWeather">الطقس الحالي</span>
-            </h2>
-            <p class="section-subtitle" data-translate="tools.currentWeatherDesc">
-                شاهد الطقس الحالي والتوقعات لأي محافظة في مصر
-            </p>
-        </div>
-        <div id="current-weather-container"></div>
-    </section>
 
-    <!-- ========== WEATHER COMPARISON TOOL ========== -->
-    <section id="weather-comparison-tool" class="section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span data-translate="tools.weatherComparison">المقارنة بين المحافظات</span>
-            </h2>
-            <p class="section-subtitle" data-translate="tools.weatherComparisonDesc">
-                قارن الطقس بين حتى 4 محافظات في نفس الوقت
-            </p>
-        </div>
-        <div id="weather-comparison-container"></div>
-    </section>
-
-    <!-- ========== WEATHER MAP TOOL ========== -->
-    <section id="weather-map-tool" class="section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span data-translate="tools.weatherMap">خريطة الطقس</span>
-            </h2>
-            <p class="section-subtitle" data-translate="tools.weatherMapDesc">
-                استكشف الطقس في جميع محافظات مصر على خريطة تفاعلية
-            </p>
-        </div>
-        <div id="weather-map-container"></div>
-    </section>
-
-    <!-- ========== EXPLORE EGYPT SECTION ========== -->
+    <!-- ========== EXPLORE SECTION ========== -->
     <section id="explore" class="section">
         <div class="section-header">
             <h2 class="section-title" data-translate="explore.title">Explore Egypt</h2>
-            <p class="section-subtitle" data-translate="explore.subtitle">Browse by category</p>
+            <p class="section-subtitle" data-translate="explore.subtitle">Discover Egypt's most iconic destinations</p>
         </div>
 
-        <!-- Category Filter Buttons -->
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-category="all" data-translate="explore.all">All</button>
-            <button class="filter-btn" data-category="ancient" data-translate="explore.ancient">Ancient Sites</button>
-            <button class="filter-btn" data-category="nature" data-translate="explore.nature">Nature</button>
-            <button class="filter-btn" data-category="beach" data-translate="explore.beach">Beaches</button>
-            <button class="filter-btn" data-category="museum" data-translate="explore.museum">Museums</button>
-            <button class="filter-btn" data-category="religious" data-translate="explore.religious">Religious Sites</button>
-            <button class="filter-btn" data-category="historical" data-translate="explore.historical">Historical Sites</button>
-            <button class="filter-btn" data-category="modern" data-translate="explore.modern">Modern Cities</button>
-            <button class="filter-btn" data-category="cultural" data-translate="explore.cultural">Cultural Sites</button>
+        <!-- Filter Buttons -->
+        <div class="explore-filters" style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; margin-bottom:2rem;">
+            <button class="filter-btn active" data-category="all"        data-translate="explore.all">All Places</button>
+            <button class="filter-btn" data-category="ancient"           data-translate="explore.ancient">Ancient Sites</button>
+            <button class="filter-btn" data-category="nature"            data-translate="explore.nature">Nature &amp; Oases</button>
+            <button class="filter-btn" data-category="religious"         data-translate="explore.religious">Religious Sites</button>
+            <button class="filter-btn" data-category="historical"        data-translate="explore.historical">Historical Sites</button>
+            <button class="filter-btn" data-category="museum"            data-translate="explore.museum">Museums &amp; Culture</button>
+            <button class="filter-btn" data-category="beach"             data-translate="explore.beach">Beaches &amp; Resorts</button>
+            <button class="filter-btn" data-category="cultural"          data-translate="explore.cultural">Cultural Experiences</button>
+            <button class="filter-btn" data-category="modern"            data-translate="explore.modern">Modern Cities</button>
         </div>
 
-        <!-- Dynamic Cards Container - ALL 55 places loaded here -->
-        <div class="explore-cards-grid" id="explore-cards-container">
-            <!-- Cards will be loaded dynamically by explore-dynamic.js -->
-            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                <p data-translate="explore.loading">Loading places...</p>
-            </div>
-        </div>
+        <!-- Cards Grid — populated by explore-dynamic.js -->
+        <div class="explore-cards-grid" id="explore-cards-container"></div>
     </section>
 
     <!-- ========== MAP SECTION ========== -->
@@ -438,7 +412,7 @@
             </div>
             <h2 class="plans-hero-title" data-translate="plans.title">Travel Plans</h2>
             <p class="plans-hero-subtitle" data-translate="plans.subtitle">Discover Egypt's 27 Governorates</p>
-            
+
             <!-- Stats -->
             <div class="plans-stats">
                 <div class="plans-stat">
@@ -517,7 +491,7 @@
             <h2 class="section-title" data-translate="map.title">Explore Egypt Map</h2>
             <p class="section-subtitle" data-translate="map.subtitle">Interactive map of Egypt's tourist attractions</p>
         </div>
-        
+
         <div class="map-container">
             <div class="map-actions">
                 <button class="map-btn" id="openMapBtn" data-translate="map.openInMaps">
@@ -549,7 +523,7 @@
         </div>
 
         <!-- AI Info Bar -->
-        <div class="ai-info-bar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div class="ai-info-bar" style="background: linear-gradient(135deg, #c1a025 0%, #c1a025 100%); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div style="display: flex; align-items: center; gap: 1rem;">
                 <div id="engine-indicator" style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem;">
                     <span style="opacity: 0.8;">Next Engine:</span>
@@ -1099,9 +1073,6 @@
 <script src="js/features/filters.js"></script>
 <script src="js/features/map.js"></script>
 
-<!-- Api keys -->
-<script src="js/config/%20keys.js"></script>
-
 <!-- AI Guide - Gemini Powered (NEW!) -->
 <script src="js/ai-guide-quad.js"></script>
 
@@ -1521,27 +1492,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('✅ تم ربط أحداث المرشد الذكي');
-    
-    // التأكد من ظهور زر تسجيل الدخول
-    setTimeout(function() {
-        const authButtons = document.getElementById('auth-buttons');
-        const authMobileItem = document.getElementById('auth-mobile-item');
-        const userMenuContainer = document.getElementById('user-menu-container');
-        
-        // إذا لم يكن هناك Firebase أو مستخدم مسجل، أظهر زر تسجيل الدخول
-        if (typeof firebase === 'undefined' || !window.currentUser) {
-            if (authButtons && authButtons.style.display === 'none') {
-                authButtons.style.display = 'flex';
-                console.log('✅ تم عرض زر تسجيل الدخول (fallback)');
-            }
-            if (authMobileItem && authMobileItem.style.display === 'none') {
-                authMobileItem.style.display = 'block';
-            }
-            if (userMenuContainer) {
-                userMenuContainer.style.display = 'none';
-            }
-        }
-    }, 1000); // انتظر ثانية بعد تحميل الصفحة
 });
 </script>
 

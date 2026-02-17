@@ -483,7 +483,7 @@ ${new Date().toLocaleString('en-US')}`;
             
             return `
 <div class="smart-plan-card" style="
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #c1a025 0%, #c1a025 100%);
     color: white;
     padding: 2rem;
     border-radius: 16px;

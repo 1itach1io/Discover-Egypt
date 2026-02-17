@@ -23,22 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeAuthState() {
     console.log('👤 Setting up auth state listener...');
     
-    // التأكد من ظهور زر تسجيل الدخول افتراضياً
-    const authButtons = document.getElementById('auth-buttons');
-    const authMobileItem = document.getElementById('auth-mobile-item');
-    const userMenuContainer = document.getElementById('user-menu-container');
-    
-    // عرض أزرار تسجيل الدخول افتراضياً
-    if (authButtons) authButtons.style.display = 'flex';
-    if (authMobileItem) authMobileItem.style.display = 'block';
-    if (userMenuContainer) userMenuContainer.style.display = 'none';
-    
-    // التحقق من وجود Firebase
-    if (typeof firebase === 'undefined' || !firebase.auth) {
-        console.log('⚠️ Firebase not available - showing login button');
-        return;
-    }
-    
     // Listen for authentication state changes
     firebase.auth().onAuthStateChanged((user) => {
         console.log('🔄 Auth state changed:', user ? 'User logged in' : 'User logged out');
@@ -46,6 +30,7 @@ function initializeAuthState() {
         const authButtons = document.getElementById('auth-buttons');
         const authMobileItem = document.getElementById('auth-mobile-item');
         const userMenuContainer = document.getElementById('user-menu-container');
+        const mobileUserProfile = document.getElementById('mobile-user-profile');
         
         if (user) {
             // User is signed in
@@ -58,6 +43,12 @@ function initializeAuthState() {
             // Show user menu
             if (userMenuContainer) userMenuContainer.style.display = 'flex';
             
+            // Show mobile user profile
+            if (mobileUserProfile) {
+                mobileUserProfile.classList.add('show');
+                updateMobileUserProfile(user);
+            }
+            
             // Update user info
             updateUserInfo(user);
         } else {
@@ -66,7 +57,10 @@ function initializeAuthState() {
             
             // Show auth buttons
             if (authButtons) authButtons.style.display = 'flex';
-            if (authMobileItem) authMobileItem.style.display = 'block';
+            if (authMobileItem) authMobileItem.style.display = 'list-item';
+            
+            // Hide mobile user profile
+            if (mobileUserProfile) mobileUserProfile.classList.remove('show');
             
             // Hide user menu
             if (userMenuContainer) userMenuContainer.style.display = 'none';
@@ -170,6 +164,25 @@ async function handleLogout() {
         console.error('❌ Logout error:', error);
         alert('حدث خطأ أثناء تسجيل الخروج');
     }
+}
+
+// ========== Update Mobile User Profile ==========
+function updateMobileUserProfile(user) {
+    if (!user) return;
+    
+    const displayName = user.displayName || user.email.split('@')[0];
+    const email = user.email;
+    const photoURL = user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayName) + '&background=d4af37&color=fff&size=128';
+    
+    const mobileUserPhoto = document.getElementById('mobile-user-photo');
+    const mobileUserName = document.getElementById('mobile-user-name');
+    const mobileUserEmail = document.getElementById('mobile-user-email');
+    
+    if (mobileUserPhoto) mobileUserPhoto.src = photoURL;
+    if (mobileUserName) mobileUserName.textContent = displayName;
+    if (mobileUserEmail) mobileUserEmail.textContent = email;
+    
+    console.log('✅ Mobile user profile updated');
 }
 
 // Make logout function globally available

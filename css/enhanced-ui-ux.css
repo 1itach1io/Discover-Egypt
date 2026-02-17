@@ -38,7 +38,7 @@
     
     /* Advanced Gradients */
     --gradient-sunrise: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ee5a6f 100%);
-    --gradient-ocean: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-ocean: linear-gradient(135deg, #c1a025 0%, #c1a025 100%);
     --gradient-forest: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
     --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     --gradient-royal: linear-gradient(135deg, #d4af37 0%, #c89b3c 50%, #d4af37 100%);
