@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخطط رحلتك في مصر | Egypt Travel Planner</title>
+    <meta name="description" content="خطط رحلتك لأي محافظة في مصر - 27 محافظة مع أكثر من 2000+ وجهة محلية أصيلة">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🇪🇬</span>
+                <span class="logo-text" data-lang-ar="مخطط رحلتك" data-lang-en="Travel Planner" data-lang-fr="Planificateur de Voyage"></span>
+            </div>
+            <nav class="nav">
+                <div class="lang-switcher">
+                    <button class="lang-btn" onclick="setLang('ar')" id="lang-ar">ع</button>
+                    <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
+                    <button class="lang-btn" onclick="setLang('fr')" id="lang-fr">FR</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-lang-ar="اكتشف مصر الحقيقية" data-lang-en="Discover Real Egypt" data-lang-fr="Découvrez la Vraie Égypte"></h1>
+                <p class="hero-subtitle" data-lang-ar="27 محافظة • 2000+ وجهة أصيلة • طعام محلي • تجارب فريدة" data-lang-en="27 Governorates • 2000+ Authentic Places • Local Food • Unique Experiences" data-lang-fr="27 Gouvernorats • 2000+ Destinations Authentiques • Cuisine Locale • Expériences Uniques"></p>
+                <button class="hero-btn" onclick="startPlanning()" data-lang-ar="ابدأ التخطيط" data-lang-en="Start Planning" data-lang-fr="Commencer la Planification"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planning Steps -->
+    <div id="planner" class="planner hidden">
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="steps-progress">
+                <div class="step active" data-step="0">
+                    <div class="step-circle">1</div>
+                    <div class="step-label" data-lang-ar="الاهتمامات" data-lang-en="Interests" data-lang-fr="Intérêts"></div>
+                </div>
+                <div class="step" data-step="1">
+                    <div class="step-circle">2</div>
+                    <div class="step-label" data-lang-ar="الوجهات" data-lang-en="Destinations" data-lang-fr="Destinations"></div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-circle">3</div>
+                    <div class="step-label" data-lang-ar="التفاصيل" data-lang-en="Details" data-lang-fr="Details"></div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-circle">4</div>
+                    <div class="step-label" data-lang-ar="الميزانية" data-lang-en="Budget" data-lang-fr="Budget"></div>
+                </div>
+            </div>
+
+            <!-- Step Content -->
+            <div class="step-content">
+                <!-- Step 1: Interests -->
+                <div class="step-panel active" data-step="0">
+                    <h2 class="step-title" data-lang-ar="ما الذي يهمك؟" data-lang-en="What interests you?" data-lang-fr="Qu'est-ce qui vous intéresse?"></h2>
+                    <div id="interests-grid" class="interests-grid"></div>
+                </div>
+
+                <!-- Step 2: Governorates -->
+                <div class="step-panel" data-step="1">
+                    <h2 class="step-title" data-lang-ar="أين تريد الذهاب؟" data-lang-en="Where do you want to go?" data-lang-fr="Où voulez-vous aller?"></h2>
+                    <div class="search-box">
+                        <input type="text" id="gov-search" placeholder="ابحث عن محافظة..." onkeyup="searchGovernorate()">
+                    </div>
+                    <div id="governorates-grid" class="governorates-grid"></div>
+                </div>
+
+                <!-- Step 3: Details -->
+                <div class="step-panel" data-step="2">
+                    <h2 class="step-title" data-lang-ar="تفاصيل رحلتك" data-lang-en="Trip Details" data-lang-fr="Détails du Voyage"></h2>
+                    <div class="details-form">
+                        <div class="form-group">
+                            <label data-lang-ar="عدد الأيام" data-lang-en="Number of Days" data-lang-fr="Nombre de jours"></label>
+                            <input type="number" id="days-input" min="1" max="30" value="3">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-ar="عدد الأشخاص" data-lang-en="Number of People" data-lang-fr="Nombre de personnes"></label>
+                            <input type="number" id="people-input" min="1" max="20" value="2">
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="foreigner-checkbox">
+                                <span data-lang-ar="أنا أجنبي (أسعار مختلفة)" data-lang-en="Foreigner (Different prices)" data-lang-fr="Étranger (Prix différents)"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Budget -->
+                <div class="step-panel" data-step="3">
+                    <h2 class="step-title" data-lang-ar="اختر ميزانيتك" data-lang-en="Choose Your Budget" data-lang-fr="Choisissez Votre Budget"></h2>
+                    <div class="budget-options" id="budget-grid"></div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="step-navigation">
+                <button class="btn-secondary" id="prev-btn" onclick="previousStep()" data-lang-ar="السابق" data-lang-en="Previous" data-lang-fr="Précédent"></button>
+                <button class="btn-primary" id="next-btn" onclick="nextStep()" data-lang-ar="التالي" data-lang-en="Next" data-lang-fr="Suivant"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="results hidden">
+        <div class="container">
+            <div class="results-header">
+                <h2 data-lang-ar="خطة رحلتك" data-lang-en="Your Trip Plan" data-lang-fr="Votre Plan de Voyage"></h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-primary" onclick="savePlanToParent()" data-lang-ar="حفظ الخطة" data-lang-en="Save Plan" data-lang-fr="Sauvegarder">
+                        <i class="fas fa-save"></i>
+                    </button>
+                    <button class="btn-secondary" onclick="resetPlanner()" data-lang-ar="خطة جديدة" data-lang-en="New Plan" data-lang-fr="Nouveau Plan"></button>
+                </div>
+            </div>
+            
+            <div class="cost-summary" id="cost-summary"></div>
+            
+            <div id="itinerary" class="itinerary"></div>
+            
+            <div class="tips-section" id="tips-section"></div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+        <p data-lang-ar="جاري إنشاء خطتك المفصلة..." data-lang-en="Creating your detailed plan..." data-lang-fr="Création de votre plan détaillé..."></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

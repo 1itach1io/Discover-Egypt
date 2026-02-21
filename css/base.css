@@ -1,0 +1,112 @@
+
+
+
+@import url('design-system.css');
+
+
+
+
+:root {
+    
+    --spacing-xs: var(--space-2);
+    --spacing-sm: var(--space-4);
+    --spacing-md: var(--space-6);
+    --spacing-lg: var(--space-8);
+    --spacing-xl: var(--space-12);
+    
+    
+    --text-light: var(--text-on-dark);
+    --border-color: var(--border-primary);
+    --shadow-light: var(--shadow-sm);
+    --shadow-medium: var(--shadow-md);
+    --shadow-heavy: var(--shadow-lg);
+    
+    
+    --transition-fast: var(--transition-fast);
+    --transition-medium: var(--transition-base);
+    --transition-slow: var(--transition-slow);
+}
+
+
+
+:root {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-secondary: #111827;
+    --text-primary: #f3f4f6;
+    --text-secondary: #cbd5e1;
+    --primary-gold: #d4af37;
+    --border-soft: rgba(255,255,255,0.08);
+}
+
+
+
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+
+
+.modal,
+.travel-planner-modal,
+.plans-modal {
+    background: var(--bg-card);
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    color: var(--text-primary);
+}
+
+.modal-header {
+    background: linear-gradient(135deg,#1f2937,#111827);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.modal-content,
+.modal-body {
+    padding: 2.5rem;
+    background: var(--bg-card);
+}
+
+.modal button {
+    background: linear-gradient(135deg,var(--primary-gold),#c89b3c);
+    border: none;
+    border-radius: 25px;
+    padding: 0.7rem 1.5rem;
+    color: white;
+}
+
+
+
+.search-section {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.search-section input {
+    background: var(--bg-secondary);
+    border: 2px solid var(--primary-gold);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+}
+
+.search-section input:focus {
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.3);
+    outline: none;
+}
+
+.search-result-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: 0.3s;
+}
+
+.search-result-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,175,55,0.4);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}

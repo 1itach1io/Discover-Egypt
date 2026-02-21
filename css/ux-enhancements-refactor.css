@@ -1,0 +1,179 @@
+/*
+  Non-destructive enhancement layer
+  - Improves typography scale
+  - Standardizes spacing using --space variables
+  - Adds theme toggle button styles
+  - Accessibility optimizations (focus, contrast)
+  - Ensures responsive images
+  - Overrides only when needed, leaving underlying system intact
+*/
+
+/* --------------------------------------------------------------------------
+   global resets & base
+   -------------------------------------------------------------------------- */
+html {
+    font-size: 100%; /* 16px default */
+    box-sizing: border-box;
+}
+
+/* alias used in legacy rules */
+:root {
+    --shadow-medium: var(--shadow-md);
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: var(--line-height-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* smooth focus outline for accessibility */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ensure buttons also show visible focus for keyboard users */
+button:focus, .btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* responsive images */
+img, svg, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* links contrast and hover style */
+a, .nav-link {
+    color: var(--text-link);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+a:hover, .nav-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   typography hierarchy
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-4);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+}
+h1 { font-size: var(--font-size-5xl); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-3xl); }
+h4 { font-size: var(--font-size-2xl); }
+h5 { font-size: var(--font-size-xl); }
+h6 { font-size: var(--font-size-lg); }
+
+p {
+    margin-bottom: var(--space-4);
+}
+
+.section, section {
+    padding: var(--space-8) var(--space-4);
+}
+
+/* consistent nav link padding */
+.navbar .nav-link {
+    padding: var(--space-2) var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   button improvements
+   -------------------------------------------------------------------------- */
+.btn {
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-primary, .btn-secondary, .btn-outline {
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+/* ensure disabled state clearly visible */
+.btn:disabled {
+    opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   theme toggle button (injected by JS)
+   -------------------------------------------------------------------------- */
+.theme-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    padding: var(--space-2);
+    border-radius: var(--radius-full);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus {
+    background-color: var(--bg-hover);
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+    color: var(--text-on-dark);
+}
+
+/* reduce visual clutter for icons inside buttons */
+.theme-toggle-btn i {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   other helpers
+   -------------------------------------------------------------------------- */
+/* use spacing variables for common utility classes */
+.mt-1 { margin-top: var(--space-1) !important; }
+.mb-1 { margin-bottom: var(--space-1) !important; }
+.mt-2 { margin-top: var(--space-2) !important; }
+.mb-2 { margin-bottom: var(--space-2) !important; }
+.mt-4 { margin-top: var(--space-4) !important; }
+.mb-4 { margin-bottom: var(--space-4) !important; }
+
+/* ensure high contrast for important text */
+[data-theme="dark"] {
+    --text-link: #96caff;
+}
+
+/* MOBILE-SPECIFIC ADJUSTMENTS ------------------------------------------------ */
+@media (max-width: 768px) {
+    /* hide original selector from top bar; JS will move it into drawer */
+    .nav-controls .language-select {
+        display: none !important;
+    }
+    /* container added by script when selector moves */
+    #mobile-lang-container {
+        padding: var(--space-3) var(--space-6);
+        width: 100%;
+    }
+    #mobile-lang-container .language-select {
+        width: 100%;
+    }
+    /* increase tap area for links in drawer */
+    .nav-menu .nav-link {
+        padding-top: var(--space-4);
+        padding-bottom: var(--space-4);
+        font-size: var(--font-size-lg);
+    }
+    .nav-menu .mobile-menu-item {
+        padding: var(--space-3) var(--space-6);
+    }}

@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Discover Egypt</title>
     
-    <link rel="icon" type="image/webp" href="images/giza-pyramids-frygia9m5ggjhaz1.webp"/>
+    <link rel="icon" href="images/303474.webp" sizes="any">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/theme-enhanced.css">
+    <!-- additional layer for refined typography, spacing and theme toggle -->
+    <link rel="stylesheet" href="css/ux-enhancements-refactor.css">
     
     <style>
         * {
@@ -14,19 +18,26 @@
             box-sizing: border-box;
         }
         
+        html, body {
+            
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #D4AF37 0%, #8B7355 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            
+            overflow: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* Animated background */
+        
         body::before {
             content: '';
             position: absolute;
@@ -45,15 +56,22 @@
         }
         
         .auth-container {
-            background: white;
+            background: var(--bg-card);
             border-radius: 24px;
             padding: 50px 40px;
             max-width: 450px;
             width: 100%;
-            box-shadow: 0 30px 90px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-xl);
             position: relative;
             z-index: 1;
             animation: slideIn 0.6s ease-out;
+            
+            margin: 0 10px;
+            
+            border: 2px solid var(--border-primary);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            
+            border-bottom: none;
         }
         
         @keyframes slideIn {
@@ -73,14 +91,14 @@
         }
         
         .logo h1 {
-            color: #D4AF37;
+            color: var(--primary-color);
             font-size: 32px;
             margin-bottom: 5px;
             font-weight: 700;
         }
         
         .logo p {
-            color: #666;
+            color: var(--text-secondary);
             font-size: 14px;
         }
         
@@ -88,7 +106,7 @@
             display: flex;
             gap: 10px;
             margin-bottom: 30px;
-            background: #f5f5f5;
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 5px;
         }
@@ -98,7 +116,7 @@
             padding: 12px;
             border: none;
             background: transparent;
-            color: #666;
+            color: var(--text-secondary);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -107,9 +125,9 @@
         }
         
         .auth-tab.active {
-            background: white;
-            color: #D4AF37;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--bg-card);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
         }
         
         .auth-form {
@@ -133,7 +151,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 14px;
         }
@@ -141,17 +159,23 @@
         .form-group input {
             width: 100%;
             padding: 14px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-primary);
             border-radius: 10px;
             font-size: 15px;
             transition: all 0.3s;
-            background: #fafafa;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: #D4AF37;
-            background: white;
+            border-color: var(--primary-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        .form-group input::placeholder {
+            color: var(--text-muted);
         }
         
         .forgot-password {
@@ -160,7 +184,7 @@
         }
         
         .forgot-password a {
-            color: #D4AF37;
+            color: var(--primary-color);
             text-decoration: none;
             font-size: 13px;
         }
@@ -168,8 +192,8 @@
         .submit-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: var(--text-on-primary);
             border: none;
             border-radius: 10px;
             font-size: 16px;
@@ -201,13 +225,13 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: #e0e0e0;
+            background: var(--border-primary);
         }
         
         .divider span {
-            background: white;
+            background: var(--bg-card);
             padding: 0 15px;
-            color: #999;
+            color: var(--text-muted);
             font-size: 14px;
             position: relative;
             z-index: 1;
@@ -216,10 +240,10 @@
         .google-btn {
             width: 100%;
             padding: 14px;
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--bg-card);
+            border: 2px solid var(--border-primary);
             border-radius: 10px;
-            color: #333;
+            color: var(--text-primary);
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
@@ -231,8 +255,8 @@
         }
         
         .google-btn:hover {
-            border-color: #D4AF37;
-            background: #fafafa;
+            border-color: var(--primary-color);
+            background: var(--bg-secondary);
         }
         
         .google-icon {
@@ -246,16 +270,16 @@
         }
         
         .back-home a {
-            color: #666;
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
         }
         
         .back-home a:hover {
-            color: #D4AF37;
+            color: var(--primary-color);
         }
         
-        /* Language Switcher */
+        
         .lang-switcher {
             position: absolute;
             top: 20px;
@@ -264,22 +288,23 @@
         }
         
         .lang-btn {
-            background: white;
-            border: 2px solid rgba(255,255,255,0.3);
+            background: var(--bg-card);
+            border: 2px solid var(--border-primary);
             padding: 8px 15px;
             border-radius: 20px;
-            color: #333;
+            color: var(--text-primary);
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-sm);
         }
         
         .lang-btn:hover {
-            background: #f5f5f5;
+            background: var(--bg-secondary);
+            border-color: var(--primary-color);
         }
         
-        /* Mobile Responsive */
+        
         @media (max-width: 600px) {
             .auth-container {
                 padding: 40px 30px;
@@ -295,6 +320,19 @@
             }
         }
     </style>
+<!-- early theme initialization to prevent flash on login page -->
+<script>
+    (function(){
+        try {
+            var stored = localStorage.getItem('theme');
+            var autoDetect = localStorage.getItem('autoDetectTheme') !== 'false';
+            var prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var manual = localStorage.getItem('theme-manual') === 'true';
+            var theme = (autoDetect && !manual) ? (prefers ? 'dark' : 'light') : (stored || (prefers ? 'dark' : 'light'));
+            document.documentElement.setAttribute('data-theme', theme);
+        } catch(e){}
+    })();
+</script>
 </head>
 <body>
     <!-- Language Switcher -->
@@ -397,43 +435,47 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
+    <!-- Core Scripts -->
+    <script src="js/core/theme.js"></script>
+    
     <!-- Auth System -->
     <script src="js/auth/auth-system.js"></script>
     
     <script>
-        // Get current language
+        initializeTheme();
+        
         let currentLang = localStorage.getItem('language') || 'en';
         document.getElementById('language-select').value = currentLang;
         
-        // Update UI text based on language
+        
         function updateUIText() {
             const t = authTranslations[currentLang];
             
-            // Tabs
+            
             document.getElementById('login-tab').textContent = t.login;
             document.getElementById('signup-tab').textContent = t.signup;
             
-            // Login form
+            
             document.getElementById('login-email-label').textContent = t.email;
             document.getElementById('login-password-label').textContent = t.password;
             document.getElementById('forgot-link').textContent = t.forgotPassword;
             document.getElementById('login-submit').textContent = t.loginButton;
             document.getElementById('google-login-text').textContent = t.loginWithGoogle;
             
-            // Signup form
+            
             document.getElementById('signup-name-label').textContent = t.name;
             document.getElementById('signup-email-label').textContent = t.email;
             document.getElementById('signup-password-label').textContent = t.password;
             document.getElementById('signup-submit').textContent = t.signupButton;
             document.getElementById('google-signup-text').textContent = t.loginWithGoogle;
             
-            // Other
+            
             document.getElementById('or-text').textContent = t.or;
             document.getElementById('or-text-2').textContent = t.or;
             document.getElementById('welcome-text').textContent = 
                 document.querySelector('.auth-form.active').id === 'login-form' ? t.welcome : t.createAccount;
             
-            // RTL for Arabic
+            
             if (currentLang === 'ar') {
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', 'ar');
@@ -443,32 +485,32 @@
             }
         }
         
-        // Language change
+        
         document.getElementById('language-select').addEventListener('change', (e) => {
             currentLang = e.target.value;
             localStorage.setItem('language', currentLang);
             updateUIText();
         });
         
-        // Tab switching
+        
         document.querySelectorAll('.auth-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const tabName = tab.getAttribute('data-tab');
                 
-                // Update tabs
+                
                 document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
-                // Update forms
+                
                 document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
                 document.getElementById(`${tabName}-form`).classList.add('active');
                 
-                // Update welcome text
+                
                 updateUIText();
             });
         });
         
-        // Login form submit
+        
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -485,7 +527,7 @@
             }
         });
         
-        // Signup form submit
+        
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -503,7 +545,7 @@
             }
         });
         
-        // Google login buttons
+        
         document.getElementById('google-login-btn').addEventListener('click', async () => {
             try {
                 await window.authSystem.loginWithGoogle();
@@ -526,8 +568,10 @@
             }
         });
         
-        // Initialize UI
+        
         updateUIText();
     </script>
+    <!-- enhancement utilities for navigation and theme toggle -->
+    <script src="js/ux-enhancements.js"></script>
 </body>
 </html>
